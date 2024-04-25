@@ -1,4 +1,4 @@
-# Git bash command cheatsheet
+# Git Bash Command Cheatsheet
 
 **Collections of useful git bash command**
 
@@ -14,140 +14,140 @@
 
 *--Clone repo*
 
-langsung dari master :
+directly from master :
     
     git clone [link repo]
 
-clone spesifik branch :
+specific branch cloning :
     
-    git clone -b [nama branch] [link repo]
+    git clone -b [branch name] [link repo]
 
-clone ke spesifik folder (... sama kaya command diatas, tambahin aja nama folder dibelakang link repo) :
+clone to a specific folder (... same as above command, just add folder name after repo link) :
     
-    ... [link repo] [nama folder]
+    ... [link repo] [folder name]
 
-*--Cek status working directory saat ini*
+*--Check current working directory status*
 
     git status
     
-*--Pull / sync dengan suatu branch*
+*--Pull / sync with a branch*
 
-	git pull origin [nama branch]
+	git pull origin [branch name]
 
-kalau saat push udah set-upstream/ -u, langsung aja command kaya dibawah :
+if already set-upstream/-u during push, just use command like below :
 
     git pull
     
 notes :
 
-    - saat pull ke suatu branch lain, misal ke release, terus ternyata ada file baru di release, nanti otomatis bakal merge dengan branch yg skrng lg lo kerjain
-        biasanya bakal lsg muncul vim editor, kalo gk ada yang mau diubah langsung save aja filenya dengan cara ketik :wq trus enter
-    - sama kaya diatas, tapi ternyata ada file yg lg lo kerjain itu isinya beda sama yg di branch lo pull, nanti bakal conflict, buat resolvenya bisa liat dibawah
+    - when pulling to another branch, for example to release, and then there's new file in release, it will automatically merge with the branch you're currently working on
+        usually, vim editor will appear immediately, if there's nothing to be changed just save the file by typing :wq then enter
+    - same as above, but it turns out the file you're working on has different content than the one in the branch you pull, it will result in conflict, for resolving see below
   
-*--Ganti branch / create branch baru*
+*--Switch branch / create new branch*
 
-Kalo branchnya udh ada bakal switch kesitu, kalo blm ada, saat push nanti bakal create branch baru :
+If the branch already exists, it will switch to it. If it doesn't exist, when pushing it will create a new branch :
 
-    git checkout -b [nama branch]
+    git checkout -b [branch name]
     
-Kalo butuh clone / rollback ke posisi repo saat commit tertentu :
+If you need to clone / rollback to the repository's position at a specific commit :
 
-    git checkout -b [nama branch baru bebas] [commit sha id]
+    git checkout -b [new arbitrary branch name] [commit sha id]
     
-*--Init suatu folder jadi repo git*
+*--Initiate a folder as a git repository*
 
     git init
     
-*--Nambahin remote origin*
+*--Add remote origin*
 
-    git remote add origin [url repo]
+    git remote add origin [repo url]
     
 *--Show current remote origin*
 
     git remote show origin
 
-*--Ubah url remote origin*
+*--Change remote origin url*
 
-    git remote set-url origin [url repo]
+    git remote set-url origin [repo url]
 
-*--Commit perubahan*
+*--Commit changes*
 
-buat add file yang diubah :
+to add modified files :
 
     git add .
 
-kalo mau cuman add spesifik file :
+if you want to add specific file :
 
-    git add [nama file]
+    git add [file name]
 
-commit yang di add :
+commit the added files :
 
     git commit -m [message]
 
-kalo salah input commit message terus mau ulang lagi :
+if mistakenly input the commit message and want to redo it :
 
     git reset --soft HEAD~1
     
-kalo mau balik ke commit sebelumnya (file yg udah lo ubah bakal keapus lagi) :
+*--Go back to the previous commit (changes in files you've made will be discarded)* :
 
     git reset --hard HEAD~1
     
-kalo file udah keapus karna balik ke commit sebelumnya, ternyata lu pengen tuh file balik lagi :
+*--If the file has been deleted because you went back to the previous commit, but then you want that file back* :
 
-    git reflog (nanti bakal munculs list commit lu beserta sha id nya)
-    git checkout -b [nama branch baru bebas] [commit sha id]
+    git reflog (a list of your commits along with their sha id will appear)
+    git checkout -b [new arbitrary branch name] [commit sha id]
 
-*--Push perubahan*
+*--Push changes* :
 
-Push perubahan setelah ngelakuin commit :
+Push changes after committing :
 
-    git push origin [nama branch]
+    git push origin [branch name]
 
-Push perubahan sekalian set-upstream origin :
+Push changes along with setting upstream origin :
 
-    git push -u origin [nama branch]
+    git push -u origin [branch name]
 
-Kalo udah set-upstream kaya diatas, kalo mau push tinggal pake command :
+Once you've set upstream as above, when you want to push, just use this command :
 
-    git push (otomatis bakal push ke branch yang sebelumnya lo set)
+    git push (it will automatically push to the previously set branch)
 
-Kalo ternyata saat push ada conflict, trus yaudah lo mau rebase / replace aja itu yang skrng ada di remote nya (ini kalo lo ngerjain branch itu bareng orang lain, minta consent dulu jangan asal force) :
+If there's a conflict during push, and you want to rebase / replace what's currently in the remote (this is if you're working on a branch with others, ask for consent before forcing) :
 
-    git push origin [nama branch] --force
+    git push origin [branch name] --force
     
-*--Merge branch dengan suatu branch di remote*
+*--Merge branch with a branch on remote* :
 
-    git checkout [nama branch 1 (branch local yg lg dikerjain)]
-    git merge [nama branch 2 (branch yg mau di merge, biasanya release/master)]
+    git checkout [branch name 1 (local branch being worked on)]
+    git merge [branch name 2 (branch to be merged, usually release/master)]
 
-atau bisa jadi pake command ini :
+or you can use this command :
 
-    git checkout [nama branch 2] [nama branch 1]
+    git checkout [branch name 2] [branch name 1]
 
-*--Rebase*
+*--Rebase* :
 
-    git checkout [nama branch 1 (branch local yg lg dikerjain)]
-    git rebase [nama branch 2 (branch yg mau di rebase, biasanya release/master)]
+    git checkout [branch name 1 (local branch being worked on)]
+    git rebase [branch name 2 (branch to be rebased, usually release/master)]
     
 notes : 
 
-    - Jangan rebase branch yang dipake bareng", contoh branch master atau release, bikin pusing nanti karna nanti developer lain butuh merge lagi dengan branch hasil rebasenya
-    - kalo merge itu bakal ngegabungin branch, nah rebase itu alternatifnya, dia bakal ngegabungin 2 branch jadi 1 juga, tapi history commitnya jadi ngurut, misal :
-        - ada branch 1 dengan commit a-b-c
-        - branch 2 itu hasil clone dari branch 1, trus ngelakuin commit d-e
-        - eh ada orang lain yg lsg push ke branch 1, jd commitnya berubah jadi a-b-c-d
-        - si branch 2 tadi bisa aja ngemerge sama branch 1, tapi nanti history commitnya jadi begini : a-b-c-d-e (e isi nya commit d-e nya si branch 2)
-        - nah bisa aja si branch 2 ngelakuin rebase, jd begini : a-b-c-d-e-f (commit d-e nya si branch 2 berubah jadi commit e-f)
-    - hasilnya history commitnya bakal linear terus, tapi kalo semua orang ngerebase, ya bakal ke replace mulu itu si branchnya, 
-      jadi rebase cocok dilakuin kalo emng ada 1 developer yang lg ngerjain fitur di suatu repo, trus trnyata ada yg ngelakuin hotfix di branch master nya, 
-      nah nanti pas deploy si developer ini mending rebase aja jadi historynya lebih rapih dibanding merge  
+    - Don't rebase branches used together, such as master or release branches, it will be confusing later because other developers will need to merge again with the resulting rebased branch
+    - if merge combines branches, then rebase is an alternative, it will also combine 2 branches into 1, but the commit history will be sorted, for example:
+        - there's branch 1 with commits a-b-c
+        - branch 2 is a clone result of branch 1, then commits d-e are made
+        - oh, someone else directly pushed to branch 1, so the commits change to a-b-c-d
+        - branch 2 could just merge with branch 1, but later the commit history will be like this: a-b-c-d-e (e contains commits d-e from branch 2)
+        - well, branch 2 could do rebase, so it becomes like this: a-b-c-d-e-f (commit d-e from branch 2 becomes commit e-f)
+    - the result is a linear commit history, but if everyone does rebase, then the branch will be replaced every time, 
+      so rebase is suitable when there's only 1 developer working on a feature in a repository, then it turns out someone did a hotfix on the master branch, 
+      well, later when this developer deploys it's better to just rebase so the history is neater than merge  
 
-*--Resolve conflict*
+*--Resolve conflict* :
 
-coba jalanin command ini :
+try running this command :
 
     - git mergetool
-    - nanti bakal muncul vimdiff yang displaynya kaya begini :
+    - a vimdiff will appear like this :
     ╔═══════╦══════╦════════╗
     ║       ║      ║        ║
     ║ LOCAL ║ BASE ║ REMOTE ║
@@ -157,15 +157,15 @@ coba jalanin command ini :
     ║        MERGED         ║
     ║                       ║
     ╚═══════════════════════╝
-    LOCAL – Ini file yang ada di local lo dr branch yg lg lo kerjain
-    BASE – kondisi file sebelum diubah
-    REMOTE – Ini file yang lo tarik pake command pull
-    MERGED – result mergenya
-    kalo mau ngedit", cara navigasinya buat pindah" dari local, base, remote, merged, pencet ctrl+w
-    - kalo mau ambil changes dari remote pake command :diffg REMOTE
-      kalo mau ambil changes dari local pake command :diffg LOCAL
-      kalo mau ambil changes dari base pake command :diffg BASE
-    - :wqa (buat save and exit)
+    LOCAL – This is the file in your local branch you're working on
+    BASE – condition of the file before being changed
+    REMOTE – This is the file you pull using pull command
+    MERGED – result of merge
+    if you want to edit, the navigation method to switch between local, base, remote, merged, press ctrl+w
+    - if you want to take changes from remote use command :diffg REMOTE
+      if you want to take changes from local use command :diffg LOCAL
+      if you want to take changes from base use command :diffg BASE
+    - :wqa (for save and exit)
     - git commit -m "message"
-    - git clean (buat ngapus extra files yang di create diff tool)
-    - git push (kalo udh kelar)
+    - git clean (for delete extra files created by diff tool)
+    - git push (when done)
